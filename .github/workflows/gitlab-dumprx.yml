@@ -82,8 +82,8 @@ jobs:
         git lfs install
         find . \( -name "*sensetime*" -o -name "*.lic" \) | cut -d'/' -f'2-' >| .gitignore
         git branch -M ${{ env.BRANCH }}
-        git config --global user.name "Carlo Dandan"
-        git config --global user.email "carlodandan.personal@proton.me"
+        git config --global user.name "naden01"
+        git config --global user.email "naden.irsyad01@gmail.com"
         git remote add origin https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.com/${{ env.USERNAME }}/android_dump_${{ env.MANUFACTURER_NAME }}_${{ env.VENDOR_NAME }}.git
         find . -type f -size +100M -exec git lfs track {} \;
         if [ -f .gitattributes ]; then
