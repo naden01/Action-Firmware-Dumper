@@ -1,12 +1,8 @@
 name: Firmware Dump
 
 on:
-  workflow_dispatch:
-    inputs:
-      FIRMWARE_LINK:
-        description: 'Firmware Link'
-        required: true
-        default: ''
+  watch:
+    types: [started]
 
 jobs:
   build:
@@ -36,7 +32,7 @@ jobs:
     - name: Dump Firmware
       run: |
         cd workspace/dumprx
-        bash dumper.sh ${{ github.event.inputs.FIRMWARE_LINK }}
+        bash dumper.sh https://drive.google.com/file/d/1xq0QdoUeaY_vBWg0xJfpFGsprJXWfi56/view?usp=sharing
         cd out
         echo "MANUFACTURER_NAME=$(grep "ro.product.vendor.manufacturer" vendor/build.prop | awk -F "=" '{split($2, words, " "); print words[1]; exit}')" >> $GITHUB_ENV
 
