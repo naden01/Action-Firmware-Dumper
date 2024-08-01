@@ -11,13 +11,13 @@ on:
 jobs:
   build:
     name: Dump by ${{ github.actor }}
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     if: github.event.repository.owner.id == github.event.sender.id
     permissions:
       contents: write
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       
     - name: Cleanup
       uses: rokibhasansagar/slimhub_actions@main
@@ -25,7 +25,7 @@ jobs:
     - name: Set Swap Space
       uses: pierotofy/set-swap-space@master
       with:
-        swap-size-gb: 12
+        swap-size-gb: 9
         
     - name: Setup Dump Environment
       run: |
