@@ -32,7 +32,7 @@ jobs:
     - name: Dump Firmware
       run: |
         cd workspace/dumprx
-        bash dumper.sh https://drive.google.com/file/d/1xq0QdoUeaY_vBWg0xJfpFGsprJXWfi56/view?usp=sharing
+        bash dumper.sh https://mega.nz/file/40oTkaYI#_oecWfk6NVWPTe_MNk4Yp_zRhSuoqsedxN1wt5WlBzo
         cd out
         echo "MANUFACTURER_NAME=$(grep "ro.product.vendor.manufacturer" vendor/build.prop | awk -F "=" '{split($2, words, " "); print words[1]; exit}')" >> $GITHUB_ENV
 
