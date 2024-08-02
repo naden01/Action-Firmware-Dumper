@@ -1,8 +1,12 @@
-name: Firmware Dump
+name: Sigma Dump
 
 on:
-  watch:
-    types: [started]
+  workflow_dispatch:
+    inputs:
+      FIRMWARE_LINK:
+        description: 'Firmware Link'
+        required: true
+        default: ''
 
 jobs:
   build:
