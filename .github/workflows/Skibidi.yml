@@ -1,4 +1,4 @@
-name: Sigma Dump
+name: Firmware Dump
 
 on:
   workflow_dispatch:
@@ -11,13 +11,13 @@ on:
 jobs:
   build:
     name: Dump by ${{ github.actor }}
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     if: github.event.repository.owner.id == github.event.sender.id
     permissions:
       contents: write
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
       
     - name: Cleanup
       uses: rokibhasansagar/slimhub_actions@main
@@ -25,7 +25,7 @@ jobs:
     - name: Set Swap Space
       uses: pierotofy/set-swap-space@master
       with:
-        swap-size-gb: 9
+        swap-size-gb: 12
         
     - name: Setup Dump Environment
       run: |
@@ -36,7 +36,7 @@ jobs:
     - name: Dump Firmware
       run: |
         cd workspace/dumprx
-        bash dumper.sh https://mega.nz/file/40oTkaYI#_oecWfk6NVWPTe_MNk4Yp_zRhSuoqsedxN1wt5WlBzo
+        bash dumper.sh ${{ github.event.inputs.FIRMWARE_LINK }}
         cd out
         echo "MANUFACTURER_NAME=$(grep "ro.product.vendor.manufacturer" vendor/build.prop | awk -F "=" '{split($2, words, " "); print words[1]; exit}')" >> $GITHUB_ENV
 
@@ -82,8 +82,8 @@ jobs:
         git lfs install
         find . \( -name "*sensetime*" -o -name "*.lic" \) | cut -d'/' -f'2-' >| .gitignore
         git branch -M ${{ env.BRANCH }}
-        git config --global user.name "naden01"
-        git config --global user.email "naden.irsyad01@gmail.com"
+        git config --global user.name "Carlo Dandan"
+        git config --global user.email "carlodandan.personal@proton.me"
         git remote add origin https://${{ secrets.GITLAB_TOKEN_NAME }}:${{ secrets.GITLAB_TOKEN }}@gitlab.com/${{ env.USERNAME }}/android_dump_${{ env.MANUFACTURER_NAME }}_${{ env.VENDOR_NAME }}.git
         find . -type f -size +100M -exec git lfs track {} \;
         if [ -f .gitattributes ]; then
