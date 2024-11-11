@@ -30,7 +30,7 @@ jobs:
     - name: Setup Dump Environment
       run: |
         mkdir -p workspace && cd workspace
-        git clone --depth=1 https://github.com/naden01/Dumprxaction ./dumprx
+        git clone --depth=1 https://github.com/neilchetty/Dumper-Script/tree/gitlab ./dumprx
         cd dumprx && bash setup.sh
 
     - name: Dump Firmware
